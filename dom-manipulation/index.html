@@ -7,88 +7,133 @@
   <style>
     /* ... existing styles ... */
     
-    .filter-section {
-      margin: 20px 0;
+    .sync-section {
+      margin: 30px 0;
       padding: 20px;
       background: white;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     
-    #categoryFilter {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      border: 1px solid #ddd;
-      width: 100%;
-      max-width: 300px;
-    }
-    
-    .active-filter {
-      background-color: #4a6fa5;
-      color: white;
-      border-color: #3a5a80;
-    }
-    
-    .category-buttons {
+    .sync-controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       margin-top: 15px;
     }
     
-    .category-btn {
-      background: #e0e7ff;
-      color: #4a6fa5;
-      border: 1px solid #c0c7ff;
-      padding: 8px 15px;
-      border-radius: 20px;
+    .sync-btn {
+      background: #9b59b6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: background 0.3s;
     }
     
-    .category-btn:hover {
-      background: #d0d7ff;
+    .sync-btn:hover {
+      background: #8e44ad;
     }
     
-    .category-btn.active {
+    .sync-status {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      background: #f0f0f0;
+      min-height: 20px;
+    }
+    
+    .conflict-resolver {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff8e1;
+      border-radius: 10px;
+      border: 1px solid #ffd54f;
+    }
+    
+    .conflict-quote {
+      margin: 10px 0;
+      padding: 15px;
+      background: white;
+      border-radius: 5px;
+      border: 1px solid #eee;
+    }
+    
+    .resolve-btn {
       background: #4a6fa5;
       color: white;
-      border-color: #3a5a80;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-right: 10px;
     }
     
-    .quote-container {
-      min-height: 200px;
+    .resolve-btn.server {
+      background: #2ecc71;
+    }
+    
+    .resolve-btn.local {
+      background: #e74c3c;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      max-width: 300px;
+    }
+    
+    .notification.success {
+      background: #2ecc71;
+    }
+    
+    .notification.error {
+      background: #e74c3c;
+    }
+    
+    .notification.warning {
+      background: #f39c12;
     }
   </style>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
   
-  <div class="filter-section">
-    <h2>Filter Quotes</h2>
+  <!-- ... existing content ... -->
+  
+  <div class="sync-section">
+    <h2>Server Synchronization</h2>
     
-    <div>
-      <label for="categoryFilter">Select Category:</label>
-      <select id="categoryFilter">
-        <option value="all">All Categories</option>
-        <!-- Categories will be populated dynamically -->
-      </select>
+    <div class="sync-controls">
+      <button id="syncNowBtn" class="sync-btn">Sync Now</button>
+      <button id="toggleAutoSync" class="sync-btn">Auto Sync: Off</button>
     </div>
     
-    <div class="category-buttons" id="categoryButtons">
-      <!-- Category buttons will be populated dynamically -->
+    <div class="sync-status" id="syncStatus">
+      Last sync: Never
+    </div>
+    
+    <div class="conflict-resolver" id="conflictResolver">
+      <h3>Conflict Detected!</h3>
+      <p>Please choose which version to keep:</p>
+      <div id="conflictContainer"></div>
     </div>
   </div>
-  
-  <div class="quote-container">
-    <div id="quoteDisplay">
-      <!-- Quotes will be displayed here -->
-    </div>
-  </div>
-  
-  <button id="newQuote" class="btn">Show New Quote</button>
-  
-  <!-- ... rest of the HTML remains the same ... -->
+
+  <div id="notificationArea"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
