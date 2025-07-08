@@ -7,105 +7,88 @@
   <style>
     /* ... existing styles ... */
     
-    #storageControls {
-      margin: 30px 0;
+    .filter-section {
+      margin: 20px 0;
       padding: 20px;
       background: white;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     
-    .control-group {
-      margin: 15px 0;
-    }
-    
-    .btn {
-      background: #4a6fa5;
-      color: white;
-      border: none;
-      padding: 10px 20px;
+    #categoryFilter {
+      padding: 10px;
       font-size: 1rem;
       border-radius: 5px;
+      border: 1px solid #ddd;
+      width: 100%;
+      max-width: 300px;
+    }
+    
+    .active-filter {
+      background-color: #4a6fa5;
+      color: white;
+      border-color: #3a5a80;
+    }
+    
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .category-btn {
+      background: #e0e7ff;
+      color: #4a6fa5;
+      border: 1px solid #c0c7ff;
+      padding: 8px 15px;
+      border-radius: 20px;
       cursor: pointer;
-      transition: background 0.3s;
-      margin-right: 10px;
+      transition: all 0.3s;
     }
     
-    .btn:hover {
-      background: #3a5a80;
+    .category-btn:hover {
+      background: #d0d7ff;
     }
     
-    .btn-success {
-      background: #2ecc71;
+    .category-btn.active {
+      background: #4a6fa5;
+      color: white;
+      border-color: #3a5a80;
     }
     
-    .btn-success:hover {
-      background: #27ae60;
-    }
-    
-    .btn-warning {
-      background: #e67e22;
-    }
-    
-    .btn-warning:hover {
-      background: #d35400;
-    }
-    
-    .message {
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
-    }
-    
-    .success {
-      background: #d4edda;
-      color: #155724;
-    }
-    
-    .error {
-      background: #f8d7da;
-      color: #721c24;
+    .quote-container {
+      min-height: 200px;
     }
   </style>
 </head>
 <body>
   <h1>Dynamic Quote Generator</h1>
   
-  <div id="quoteDisplay">
-    <!-- Quotes will be displayed here -->
+  <div class="filter-section">
+    <h2>Filter Quotes</h2>
+    
+    <div>
+      <label for="categoryFilter">Select Category:</label>
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <!-- Categories will be populated dynamically -->
+      </select>
+    </div>
+    
+    <div class="category-buttons" id="categoryButtons">
+      <!-- Category buttons will be populated dynamically -->
+    </div>
+  </div>
+  
+  <div class="quote-container">
+    <div id="quoteDisplay">
+      <!-- Quotes will be displayed here -->
+    </div>
   </div>
   
   <button id="newQuote" class="btn">Show New Quote</button>
   
-  <div id="addQuoteSection">
-    <h2>Add New Quote</h2>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote">
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category">
-    <button id="addQuoteBtn" class="btn btn-success">Add Quote</button>
-    <div id="addMessage" class="message"></div>
-  </div>
-  
-  <div id="storageControls">
-    <h2>Data Management</h2>
-    
-    <div class="control-group">
-      <button id="exportBtn" class="btn">Export Quotes as JSON</button>
-      <a id="downloadAnchor" style="display:none"></a>
-    </div>
-    
-    <div class="control-group">
-      <button id="importBtn" class="btn btn-warning">Import Quotes from JSON</button>
-      <input type="file" id="importFile" accept=".json" style="display:none">
-      <div id="importMessage" class="message"></div>
-    </div>
-    
-    <div class="control-group">
-      <button id="clearStorageBtn" class="btn">Clear All Data</button>
-      <div id="storageMessage" class="message"></div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <!-- ... rest of the HTML remains the same ... -->
 </body>
 </html>
